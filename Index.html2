@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name — Курсы рисования</title>
+    <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --text-main: #000000;
+            --text-muted: #666666;
+            --accent-color: #ff3366; 
+            --border-color: #e5e5e5;
+            --whatsapp-color: #25D366;
+            --discord-color: #5865F2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.4;
+            padding-bottom: 60px;
+        }
+
+        /* МИНИМАЛИСТИЧНЫЙ ХЕДЕР */
+        .header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        /* СТИЛЬНЫЙ СЕЛЕКТОР ЯЗЫКА */
+        .lang-select {
+            border: 1px solid var(--text-main);
+            background: #fff;
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        /* АКЦИОННАЯ ПЛАШКА */
+        .promo-banner {
+            background: var(--text-main);
+            color: #fff;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .promo-badge {
+            background: var(--accent-color);
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* ГЛАВНЫЙ ЭКРАН */
+        .hero {
+            padding: 40px 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .category {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+
+        /* СЛАЙДЕР С РАБОТАМИ */
+        .gallery-section {
+            background: #fff;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .slider-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .slider-container img.active {
+            display: block;
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+
+        .arrow {
+            background: #fff;
+            border: 1px solid var(--text-main);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .arrow:hover {
+            background: var(--text-main);
+            color: #fff;
+        }
+
+        /* КАЛЬКУЛЯТОР СТОИМОСТИ */
+        .calc-section {
+            padding: 40px 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .calc-section h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .calc-group {
+            margin-bottom: 20px;
+        }
+
+        .calc-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .calc-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: var(--border-color);
+            outline: none;
+        }
+
+        .calc-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--text-main);
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-container input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+        }
+
+        .total-box {
+            background: #f5f5f5;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .total-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+
+        /* КОМУ ПОДОЙДЕТ ЭТОТ КУРС */
+        .for-whom-section {
+            padding: 40px 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .for-whom-section h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .tag-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag-item {
+            border: 1px solid var(--text-main);
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        .tag-accent {
+            background: var(--text-main);
+            color: #fff;
+        }
+
+        /* ИНТЕРАКТИВНЫЙ ОПРОС */
+        .poll-section {
+            padding: 40px 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .poll-section h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .input-line {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid var(--text-main);
+            padding: 12px 0;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            outline: none;
+            background: transparent;
+        }
+
+        .select-line {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid var(--text-main);
+            padding: 12px 0;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            outline: none;
+            background: transparent;
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        /* КРУПНЫЕ ИНФО-БЛОКИ */
+        .info-block {
+            background: #fff;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .block-num {
+            font-size: 0.9rem;
+            font-family: monospace;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .info-block h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 15px;
+        }
+
+        .info-block p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        /* КНОПКИ */
+        .btn-black {
+            background: var(--text-main);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-black:hover {
+            opacity: 0.9;
+        }
+
+        /* МЕССЕНДЖЕРЫ ДЛЯ СВЯЗИ */
+        .messenger-section {
+            padding: 40px 20px;
+            background: #fff;
+        }
+
+        .messenger-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .msg-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .msg-whatsapp { background-color: var(--whatsapp-color); }
+        .msg-discord { background-color: var(--discord-color); }
+
+        footer {
+            padding: 30px 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            background: #fff;
+        }
+    </style>
+
+<style>
+:root{--radius:16px;}
+body{scroll-behavior:smooth;}
+.hero{
+padding:80px 20px;
+text-align:center;
+background:linear-gradient(135deg,#f5f7fa,#e4ecff);
+}
+.card,.course,.service{
+border-radius:var(--radius)!important;
+box-shadow:0 8px 24px rgba(0,0,0,.08)!important;
+transition:.3s;
+}
+.card:hover,.course:hover,.service:hover{
+transform:translateY(-6px);
+}
+.btn,button{
+border-radius:12px!important;
+padding:12px 20px!important;
+}
+img{
+max-width:100%;
+border-radius:12px;
+}
+</style>
+
+</head>
+<body>
+
+    <!-- ХЕДЕР -->
+    <header class="header">
+        <a href="#" class="logo">Name</a>
+        <!-- КНОПКА СМЕНЫ ЯЗЫКА -->
+        <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+            <option value="ru">RU</option>
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+        </select>
+    </header>
+
+    <!-- АКЦИОННАЯ ПЛАШКА -->
+    <div class="promo-banner">
+        <span id="txt-promo-text">🔥 Первый урок — 100% бесплатно</span>
+        <span class="promo-badge" id="txt-promo-badge">Акция</span>
+    </div>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+        <div class="category" id="txt-hero-cat">Персональный и групповой менторинг</div>
+        <h1 id="txt-hero-title">Рисование:<br>старт с нуля</h1>
+        <p class="hero-desc" id="txt-hero-desc">Уверенная база художественной теории, работа над собственными проектами и раскрытие авторского стиля. Попробуй первый урок абсолютно бесплатно.</p>
+    </section>
+
+    <!-- СЛАЙДЕР С РАБОТАМИ -->
+    <section class="gallery-section">
+        <div class="slider-container">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&auto=format&fit=crop&q=60" class="active" alt="Art 1">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&auto=format&fit=crop&q=60" alt="Art 2">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=60" alt="Art 3">
+        </div>
+        <div class="nav-arrows">
+            <button class="arrow" onclick="moveSlide(-1)">←</button>
+            <button class="arrow" onclick="moveSlide(1)">→</button>
+        </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР СТОИМОСТИ -->
+    <section class="calc-section">
+        <h3 id="txt-calc-title">Рассчитайте стоимость занятия</h3>
+        
+        <div class="calc-group">
+            <div class="calc-label">
+                <span id="txt-calc-duration">Длительность занятия</span>
+                <span id="hoursVal">1 час</span>
+            </div>
+            <input type="range" id="hoursSlider" class="calc-slider" min="1" max="4" value="1" oninput="calculateCost()">
+        </div>
+
+        <div class="calc-group">
+            <div class="calc-label">
+                <span id="txt-calc-people-lbl">Количество людей</span>
+                <span id="peopleVal">Я один</span>
+            </div>
+            <input type="range" id="peopleSlider" class="calc-slider" min="1" max="4" value="1" oninput="calculateCost()">
+        </div>
+
+        <label class="checkbox-container">
+            <input type="checkbox" id="freeLessonCheck" onchange="calculateCost()">
+            <span id="txt-calc-checkbox">Aктивировать бесплатный 1-й урок (-100%)</span>
+        </label>
+
+        <div class="total-box">
+            <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; color: var(--text-muted);" id="txt-calc-total-lbl">Итоговая стоимость занятия:</div>
+            <div class="total-price" id="totalPriceDisplay">20 €</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;" id="perPersonDisplay">Всё внимание ментора только вам</div>
+        </div>
+    </section>
+
+    <!-- ДЛЯ КОГО ЭТОТ КУРС -->
+    <section class="for-whom-section">
+        <h3 id="txt-whom-title">Для кого этот курс?</h3>
+        <div class="tag-grid" id="tagGridContainer">
+            <!-- Тэги генерируются через JS в зависимости от языка -->
+        </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНЫЙ ОПРОС -->
+    <section class="poll-section">
+        <h3 id="txt-poll-title">Записаться на бесплатное занятие</h3>
+        <input type="text" id="userName" class="input-line" placeholder="Ваше имя">
+        
+        <select id="userFormat" class="select-line">
+            <!-- Опции формата обновляются через JS -->
+        </select>
+
+        <select id="userWish" class="select-line">
+            <!-- Опции тем обновляются через JS -->
+        </select>
+        <button class="btn-black" id="txt-poll-btn" onclick="submitBbeWish()">Записаться бесплатно</button>
+    </section>
+
+    <!-- БЛОК 1: ТЕТ-А-ТЕТ -->
+    <section class="info-block">
+        <span class="block-num">[ 01 ]</span>
+        <h2 id="txt-b1-title">Индивидуальный формат</h2>
+        <p id="txt-b1-desc">Полное внимание ментора направлено на твой прогресс. Индивидуальный разбор штриха, постановка руки и подбор программы под твои личные цели.</p>
+        <div class="price-tag">20 € / <span class="txt-hour-unit">час</span></div>
+    </section>
+
+    <!-- БЛОК 2: С ДРУЗЬЯМИ -->
+    <section class="info-block">
+        <span class="block-num">[ 02 ]</span>
+        <h2 id="txt-b2-title">Занятия с друзьями</h2>
+        <p id="txt-b2-desc">Рисовать в компании близких веселее и выгоднее! Организуем совместный созвон, где каждый сможет создавать свой рисунок под общим кураторством ментора.</p>
+        <div class="price-tag">15 € / <span class="txt-hour-unit">час</span> <span style="font-size:0.9rem; color:var(--text-muted); font-weight:normal;" id="txt-b2-note">(с человека)</span></div>
+    </section>
+
+    <!-- СВЯЗЬ И КОНТАКТЫ -->
+    <section class="messenger-section">
+        <h3 id="txt-msg-title">Обсудить детали</h3>
+        <p style="color:var(--text-muted); margin-bottom:15px;" id="txt-msg-desc">Напиши нам в удобный мессенджер, чтобы занять свободные часы:</p>
+        <div class="messenger-grid">
+            <a href="https://wa.me/212693115901" target="_blank" class="msg-link msg-whatsapp" id="txt-btn-wa">Написать в WhatsApp</a>
+            <a href="https://discord.gg/invite" target="_blank" class="msg-link msg-discord">Открыть Discord</a>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <p id="txt-footer">© 2026 Онлайн-школа рисунка «Name». Все права защищены.</p>
+    </footer>
+
+    <!-- СКРИПТЫ С ПЕРЕВОДАМИ -->
+    <script>
+        // База переводов
+        const translations = {
+            ru: {
+                promoText: "🔥 Первый урок — 100% бесплатно",
+                promoBadge: "Акция",
+                heroCat: "Персональный и групповой менторинг",
+                heroTitle: "Рисование:<br>старт с нуля",
+                heroDesc: "Уверенная база художественной теории, работа над собственными проектами и раскрытие авторского стиля. Попробуй первый урок абсолютно бесплатно.",
+                calcTitle: "Рассчитайте стоимость занятия",
+                calcDuration: "Длительность занятия",
+                calcPeopleLbl: "Количество людей",
+                calcCheckbox: "Активировать бесплатный 1-й урок (-100%)",
+                calcTotalLbl: "Итоговая стоимость занятия:",
+                whomTitle: "Для кого этот курс?",
+                tags: ["Абсолютные новички", "Любители Аниме и Манги", "Те, кто хочет рисовать с друзьями", "Для прокачки творческого портфолио", "Для расслабления и хобби"],
+                pollTitle: "Записаться на бесплатное занятие",
+                pollNamePlh: "Ваше имя",
+                pollFormats: [
+                    { val: "Индивидуально", text: "Учиться одному (тет-а-тет с ментором)" },
+                    { val: "С друзьями", text: "Заниматься вместе с друзьями (мини-группа)" }
+                ],
+                pollWishes: [
+                    { val: "Sunset Ocean", text: "Акварельные морские пейзажи" },
+                    { val: "Cute Animals", text: "Милых животных маркерами" },
+                    { val: "Anime Characters", text: "Персонажей Аниме и Манги" },
+                    { val: "Deep Space", text: "Космические панорамы планшетом" }
+                ],
+                pollBtn: "Записаться бесплатно",
+                b1Title: "Индивидуальный формат",
+                b1Desc: "Полное внимание ментора направлено на твой прогресс. Индивидуальный разбор штриха, постановка руки и подбор программы под твои личные цели.",
+                b2Title: "Занятия с друзьями",
+                b2Desc: "Рисовать в компании близких веселее и выгоднее! Организуем совместный созвон, где каждый сможет создавать свой рисунок под общим кураторством ментора.",
+                b2Note: "(с человека)",
+                hourUnit: "час",
+                msgTitle: "Обсудить детали",
+                msgDesc: "Напиши нам в удобный мессенджер, чтобы занять свободные часы:",
+                btnWa: "Написать в WhatsApp",
+                footer: "© 2026 Онлайн-школа рисунка «Name». Все права защищены.",
+                alertTxt: "Отлично, {name}! Вы записаны на БЕСПЛАТНЫЙ первый урок. Формат: '{format}', тема: '{choice}'. Перенаправляем в WhatsApp для выбора времени."
+            },
+            fr: {
+                promoText: "🔥 Premier cours — 100% gratuit",
+                promoBadge: "Promo",
+                heroCat: "Mentorat personnel et de groupe",
+                heroTitle: "Dessin:<br>débuter de zéro",
+                heroDesc: "Une base solide de théorie artistique, un travail sur vos propres projets et la découverte de votre style. Essayez le premier cours gratuitement.",
+                calcTitle: "Calculez le coût du cours",
+                calcDuration: "Durée du cours",
+                calcPeopleLbl: "Nombre de personnes",
+                calcCheckbox: "Activer le 1er cours gratuit (-100%)",
+                calcTotalLbl: "Coût total du cours:",
+                whomTitle: "À qui s'adresse ce cours?",
+                tags: ["Grands débutants", "Fans d'Animé & Manga", "Ceux qui veulent dessiner entre amis", "Pour booster son portfolio", "Pour la détente et le plaisir"],
+                pollTitle: "S'inscrire au cours gratuit",
+                pollNamePlh: "Votre nom",
+                pollFormats: [
+                    { val: "Individuel", text: "Étudier seul (en tête-à-tête avec le mentor)" },
+                    { val: "Avec des amis", text: "Étudier avec des amis (mini-groupe)" }
+                ],
+                pollWishes: [
+                    { val: "Sunset Ocean", text: "Paysages marins à l'aquarelle" },
+                    { val: "Cute Animals", text: "Animaux mignons aux feutres" },
+                    { val: "Anime Characters", text: "Personnages d'Animé et de Manga" },
+                    { val: "Deep Space", text: "Panoramas spatiaux sur tablette" }
+                ],
+                pollBtn: "S'inscrire gratuitement",
+                b1Title: "Format Individuel",
+                b1Desc: "Toute l'attention du mentor est focalisée sur votre progression. Analyse personnalisée de votre trait, posture de la main et programme sur mesure.",
+                b2Title: "Cours entre amis",
+                b2Desc: "Dessiner à plusieurs, c'est plus fun et plus avantageux! Nous organisons un appel commun où chacun crée son dessin sous la direction du mentor.",
+                b2Note: "(par personne)",
+                hourUnit: "heure",
+                msgTitle: "Discuter des détails",
+                msgDesc: "Écrivez-nous sur votre messagerie préférée pour réserver vos créneaux:",
+                btnWa: "Écrire sur WhatsApp",
+                footer: "© 2026 École de dessin en ligne «Name». Tous droits réservés.",
+                alertTxt: "Super, {name}! Vous êtes inscrit pour le PREMIER cours GRATUIT. Format: '{format}', thème: '{choice}'. Redirection vers WhatsApp pour planifier l'heure."
+            },
+            en: {
+                promoText: "🔥 First lesson — 100% free",
+                promoBadge: "Promo",
+                heroCat: "Personal & group mentoring",
+                heroTitle: "Drawing:<br>start from scratch",
+                heroDesc: "A solid foundation in art theory, work on your own projects, and unlocking your unique style. Try the first lesson absolutely free.",
+                calcTitle: "Calculate the lesson cost",
+                calcDuration: "Lesson duration",
+                calcPeopleLbl: "Number of people",
+                calcCheckbox: "Activate free 1st lesson (-100%)",
+                calcTotalLbl: "Total lesson cost:",
+                whomTitle: "Who is this course for?",
+                tags: ["Absolute beginners", "Anime & Manga lovers", "Those who want to draw with friends", "To boost your art portfolio", "For relaxation and hobby"],
+                pollTitle: "Sign up for a free lesson",
+                pollNamePlh: "Your name",
+                pollFormats: [
+                    { val: "Individual", text: "Study alone (one-on-one with a mentor)" },
+                    { val: "With friends", text: "Study together with friends (mini-group)" }
+                ],
+                pollWishes: [
+                    { val: "Sunset Ocean", text: "Watercolor seascapes" },
+                    { val: "Cute Animals", text: "Cute markers drawing" },
+                    { val: "Anime Characters", text: "Anime & Manga characters" },
+                    { val: "Deep Space", text: "Space panoramas on tablet" }
+                ],
+                pollBtn: "Register for free",
+                b1Title: "Individual Format",
+                b1Desc: "The mentor's full attention is focused on your progress. Personalized line analysis, hand positioning, and tailored program.",
+                b2Title: "Classes with Friends",
+                b2Desc: "Drawing together is more fun and cost-effective! We'll set up a joint call where everyone creates their art under expert guidance.",
+                b2Note: "(per person)",
+                hourUnit: "hour",
+                msgTitle: "Discuss details",
+                msgDesc: "Message us on your favorite platform to reserve your hours:",
+                btnWa: "Chat via WhatsApp",
+                footer: "© 2026 Online Art School 'Name'. All rights reserved.",
+                alertTxt: "Great, {name}! You are registered for the FREE first lesson. Format: '{format}', theme: '{choice}'. Redirecting to WhatsApp to schedule your time."
+            }
+        };
+
+        let slideIndex = 0;
+        const allSlides = document.querySelectorAll('.slider-container img');
+
+        function moveSlide(step) {
+            allSlides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + step + allSlides.length) % allSlides.length;
+            allSlides[slideIndex].classList.add('active');
+        }
+
+        // Функция динамического переключения языка
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const data = translations[lang];
+
+            // Хедер и промо
+            document.getElementById('txt-promo-text').innerText = data.promoText;
+            document.getElementById('txt-promo-badge').innerText = data.promoBadge;
+
+            // Главный экран
+            document.getElementById('txt-hero-cat').innerText = data.heroCat;
+            document.getElementById('txt-hero-title').innerHTML = data.heroTitle;
+            document.getElementById('txt-hero-desc').innerText = data.heroDesc;
+
+            // Калькулятор
+            document.getElementById('txt-calc-title').innerText = data.calcTitle;
+            document.getElementById('txt-calc-duration').innerText = data.calcDuration;
+            document.getElementById('txt-calc-people-lbl').innerText = data.calcPeopleLbl;
+            document.getElementById('txt-calc-checkbox').innerText = data.calcCheckbox;
+            document.getElementById('txt-calc-total-lbl').innerText = data.calcTotalLbl;
+
+            // Блоки информации
+            document.getElementById('txt-b1-title').innerText = data.b1Title;
+            document.getElementById('txt-b1-desc').innerText = data.b1Desc;
+            document.getElementById('txt-b2-title').innerText = data.b2Title;
+            document.getElementById('txt-b2-desc').innerText = data.b2Desc;
+            document.getElementById('txt-b2-note').innerText = data.b2Note;
+
+            const hourUnits = document.querySelectorAll('.txt-hour-unit');
+            hourUnits.forEach(el => el.innerText = data.hourUnit);
+
+            // Секция «Для кого»
+            document.getElementById('txt-whom-title').innerText = data.whomTitle;
+            const tagGrid = document.getElementById('tagGridContainer');
+            tagGrid.innerHTML = '';
+            data.tags.forEach((tag, idx) => {
+                const div = document.createElement('div');
+                div.className = `tag-item ${idx === 0 || idx === 4 ? 'tag-accent' : ''}`;
+                div.innerText = tag;
+                tagGrid.appendChild(div);
+            });
+
+            // Форма опроса
+            document.getElementById('txt-poll-title').innerText = data.pollTitle;
+            document.getElementById('userName').placeholder = data.pollNamePlh;
+            document.getElementById('txt-poll-btn').innerText = data.pollBtn;
+
+            // Селекты в форме
+            const formatSelect = document.getElementById('userFormat');
+            formatSelect.innerHTML = '';
+            data.pollFormats.forEach(f => {
+                const opt = document.createElement('option');
+                opt.value = f.val;
+                opt.innerText = f.text;
+                formatSelect.appendChild(opt);
+            });
+
+            const wishSelect = document.getElementById('userWish');
+            wishSelect.innerHTML = '';
+            data.pollWishes.forEach(w => {
+                const opt = document.createElement('option');
+                opt.value = w.val;
+                opt.innerText = w.text;
+                wishSelect.appendChild(opt);
+            });
+
+            // Контакты и футер
+            document.getElementById('txt-msg-title').innerText = data.msgTitle;
+            document.getElementById('txt-msg-desc').innerText = data.msgDesc;
+            document.getElementById('txt-btn-wa').innerText = data.btnWa;
+            document.getElementById('txt-footer').innerText = data.footer;
+
+            // Пересчитываем калькулятор под текущий язык
+            calculateCost();
+        }
+
+        // Логика калькулятора цен
+        function calculateCost() {
+            const hours = parseInt(document.getElementById('hoursSlider').value);
+            const people = parseInt(document.getElementById('peopleSlider').value);
+            const isFree = document.getElementById('freeLessonCheck').checked;
+            const lang = document.getElementById('langSelect').value;
+            
+            // Настройка текста единиц времени
+            if (lang === 'ru') {
+                document.getElementById('hoursVal').innerText = hours + (hours === 1 ? " час" : hours < 5 ? " часа" : " часов");
+            } else if (lang === 'fr') {
+                document.getElementById('hoursVal').innerText = hours + (hours === 1 ? " heure" : " heures");
+            } else {
+                document.getElementById('hoursVal').innerText = hours + (hours === 1 ? " hour" : " hours");
+            }
+            
+            let ratePerPerson = 20; 
+            if (people === 1) {
+                if (lang === 'ru') {
+                    document.getElementById('peopleVal').innerText = "Я один";
+                    document.getElementById('perPersonDisplay').innerText = "Всё внимание ментора только вам";
+                } else if (lang === 'fr') {
+                    document.getElementById('peopleVal').innerText = "Seul";
+                    document.getElementById('perPersonDisplay').innerText = "Toute l'attention du mentor pour vous";
+                } else {
+                    document.getElementById('peopleVal').innerText = "Just me";
+                    document.getElementById('perPersonDisplay').innerText = "Full mentor attention just for you";
+                }
+                ratePerPerson = 20;
+            } else {
+                if (lang === 'ru') {
+                    document.getElementById('peopleVal').innerText = people + " чел. (с друзьями)";
+                    document.getElementById('perPersonDisplay').innerText = `По 15 € с человека в час`;
+                } else if (lang === 'fr') {
+                    document.getElementById('peopleVal').innerText = people + " pers. (avec amis)";
+                    document.getElementById('perPersonDisplay').innerText = `15 € par personne et par heure`;
+                } else {
+                    document.getElementById('peopleVal').innerText = people + " people (with friends)";
+                    document.getElementById('perPersonDisplay').innerText = `15 € per person per hour`;
+                }
+                ratePerPerson = 15;
+            }
+
+            if (isFree) {
+                document.getElementById('totalPriceDisplay').innerText = "0 €";
+                if (lang === 'ru') document.getElementById('perPersonDisplay').innerText = "Первый пробный урок активирован!";
+                if (lang === 'fr') document.getElementById('perPersonDisplay').innerText = "Premier cours d'essai activé !";
+                if (lang === 'en') document.getElementById('perPersonDisplay').innerText = "First trial lesson activated!";
+            } else {
+                const total = ratePerPerson * people * hours;
+                document.getElementById('totalPriceDisplay').innerText = total + " €";
+            }
+        }
+
+        function submitBbeWish() {
+            const lang = document.getElementById('langSelect').value;
+            const name = document.getElementById('userName').value || (lang === 'ru' ? 'Гость' : lang === 'fr' ? 'Invité' : 'Guest');
+            const format = document.getElementById('userFormat').value;
+            const choice = document.getElementById('userWish').value;
+            
+            let alertMsg = translations[lang].alertTxt;
+            alertMsg = alertMsg.replace('{name}', name).replace('{format}', format).replace('{choice}', choice);
+            
+            alert(alertMsg);
+            window.open('https://wa.me/212693115901', '_blank');
+        }
+
+        // Инициализация страницы при загрузке
+        window.onload = function() {
+            changeLanguage();
+        };
+    </script>
+
+
+<section id="reviews" style="padding:40px 20px">
+<h2>Отзывы учеников</h2>
+<div class="card" style="padding:20px;margin:10px 0">
+⭐️⭐️⭐️⭐️⭐️ Отличные уроки и понятные объяснения!
+</div>
+<div class="card" style="padding:20px;margin:10px 0">
+⭐️⭐️⭐️⭐️⭐️ За несколько месяцев мой уровень рисования сильно вырос.
+</div>
+</section>
+
+</body>
+</html>
